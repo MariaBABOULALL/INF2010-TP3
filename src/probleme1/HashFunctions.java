@@ -1,7 +1,9 @@
 package probleme1;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class HashFunctions 
 {
@@ -13,6 +15,7 @@ public class HashFunctions
       Integer[] array = {100, 75, 64, 25, 36, 101, 11, 92,  
                      200, 175, 164, 125, 136, 201, 111, 192,
                      300, 275, 264, 225, 236, 301, 311, 292};
+                     
       
       // Les donnees sont inserees dans un ArrayList
       ArrayList<Integer> al = new ArrayList<Integer>(array.length);
@@ -71,7 +74,7 @@ public class HashFunctions
       System.out.println( "Number of elements: " + al.size() );
       System.out.println( "Size: " + pfhash.Size() );
       System.out.println();
-      /*
+      
       // Verifie qu'il fonctionne comme prevu
       System.out.println( 100 + " est present: " + pfhash.contains(100) );
       System.out.println(  99 + " est present: " + pfhash.contains( 99) );
@@ -96,18 +99,18 @@ public class HashFunctions
       System.out.println( 299 + " est present: " + pfhash.contains(299) );
       System.out.println();
       
-      *//**
+      /**
        * Question 1 (confirmation des resultats de Exercice 2) 
-       *//*
+       */
       // Effectues quelques tests aleatoires pour verifier les proprietes de taille
       pfhash = new LinearSpacePerfectHashing<Integer>();
       System.out.println("Tests aleatoires");
       
       for(int i=0, nbElements = 10; i<40; ++i, nbElements += 10)
-      {
-         pfhash.SetArray( randomIntegers( nbElements ) );			
+      {  
+         pfhash.SetArray( randomIntegers( nbElements ) );
          System.out.println( nbElements + "\t" + pfhash.Size() );
-      }*/
+      }
    }
    
    /**
@@ -115,7 +118,15 @@ public class HashFunctions
     */
    public static ArrayList<Integer> randomIntegers(int length)
    {
-      return null;
+	  Set<Integer> nums = new HashSet<Integer>();
+	  Random generator = new Random( System.nanoTime() );
+	  while(nums.size() != length)
+	  {
+		  int num = generator.nextInt(p);
+		  nums.add(num);
+	  }
+	  ArrayList<Integer> liste = new ArrayList<Integer>(nums);
+	  return liste;
    }
 }
 

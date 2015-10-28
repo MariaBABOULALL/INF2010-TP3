@@ -33,25 +33,25 @@ public class LinearSpacePerfectHashing<AnyType>
 		if(array == null || array.size() == 0)
 		{
 			// A completer
-			data = (QuadraticSpacePerfectHashing<AnyType>[]) new Object[0];
+			data = new QuadraticSpacePerfectHashing[0];
 			return;
 		}
 		if(array.size() == 1)
 		{
 			a = b = 0;
 			// A completer
-			data = (QuadraticSpacePerfectHashing<AnyType>[]) new Object[1];
+			data = new QuadraticSpacePerfectHashing[1];
 			data[0] = (QuadraticSpacePerfectHashing<AnyType>)array.get(0);	
 			return;
 		}
 
 		// A completer
-		data = (QuadraticSpacePerfectHashing<AnyType>[]) new Object[array.size()];
+		data = new QuadraticSpacePerfectHashing[array.size()];
+		a = generator.nextInt(p-1)+1;
+		b = generator.nextInt(p);
 		for (AnyType i : array)
 		{
 			// A completer
-			a = generator.nextInt(p-1)+1;
-			b = generator.nextInt(p);
 			int hashCode = i.hashCode();
 			if(hashCode >= p) return;
 			int pos = ((a*hashCode+b)%p)%array.size();
@@ -59,32 +59,39 @@ public class LinearSpacePerfectHashing<AnyType>
 			{
 				ArrayList<AnyType> perfectArray = new ArrayList<AnyType>();
 				perfectArray.add(i);
+				data[pos] = new QuadraticSpacePerfectHashing<AnyType>();
 				data[pos].SetArray(perfectArray);
 			}	
 			else
 			{
 				ArrayList<AnyType> perfectArray = new ArrayList<AnyType>();
 				for(AnyType item : data[pos].items)
-				{
-					perfectArray.add(item);
+				{	
+					if(null != item){
+						perfectArray.add(item);
+					}	
 				}
 				perfectArray.add(i);
 				data[pos].SetArray(perfectArray);
 			}
 		}
-		
+		/*
+		System.out.println("Affichage final");
 		for (QuadraticSpacePerfectHashing<AnyType> k : data)
 		{
-			for(AnyType item : k.items)
+			if(k != null)
 			{
-				if(null != item)
+				for(AnyType item : k.items)
 				{
-					System.out.println(item);
+					if(null != item)
+					{
+						System.out.print(item +", ");
+					}
 				}
+				System.out.println();
 			}
 		}
-		
-
+		*/
 	}
 
 	public int Size()
@@ -98,20 +105,32 @@ public class LinearSpacePerfectHashing<AnyType>
 		}
 		return size;
 	}
-/*
-	public boolean contains(AnyType x )
+
+	public boolean contains(AnyType x)
 	{
 		// A completer
-
+		int m = data.length;
+		int pos = ((a*(x.hashCode())+b)%p)%m;
+		
+		if(null != data[pos] && data[pos].contains(x))
+		{
+			return true;	
+		}
+		return false;
 	}
 	
 	public AnyType getItem (AnyType x) {
 		// A completer
-		
+		int m = data.length;
+		return data[((a*(x.hashCode())+b)%p)%m].getItem(x);	
 	}
 	
 	public void remove (AnyType x) {
 		// A completer
-		
-	}*/
+		int m = data.length;
+		if(null != data[((a*(x.hashCode())+b)%p)%m])
+		{
+			data[((a*(x.hashCode())+b)%p)%m].remove(x);
+		}	
+	}
 }

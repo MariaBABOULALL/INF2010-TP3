@@ -41,7 +41,6 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		if(null != items[pos] && items[pos].equals(x))
 		{
 			return true;
-			
 		}
 		return false;
 			
@@ -87,7 +86,6 @@ public class QuadraticSpacePerfectHashing<AnyType>
 			// A completer
 			a = generator.nextInt(p-1)+1;
 			b = generator.nextInt(p);
-
 		}
 		while( collisionExists( array ) );
 	}
@@ -98,8 +96,12 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		// A completer
 		int m = array.size()*array.size();
 		items = (AnyType[]) new Object[m];
-		for(AnyType i : array)
+		if(array.size()==0)
 		{
+			System.out.println("test");
+		}
+		for(AnyType i : array)
+		{	
 			int hashCode = i.hashCode();
 			if(hashCode >= p) return true;
 			int pos = ((a*hashCode+b)%p)%m;
