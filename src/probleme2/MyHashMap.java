@@ -18,13 +18,12 @@ public class MyHashMap<KeyType, ValueType>
    {
      return (ValueType) (items.get(new Entry<KeyType,ValueType>(key,null) )).value;
    }
-/*
 
    public boolean isEmpty()
    {
      return ( items.nbElement() == 0 ); 
    }
-*/
+
    public static class Entry<KeyType,ValueType>
    {
       public KeyType key;

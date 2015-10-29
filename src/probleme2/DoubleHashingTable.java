@@ -87,15 +87,15 @@ public class DoubleHashingTable<AnyType> {
         return r - hashVal % r;
     }
     
-    public Entry get(Object key) 
+    public Entry get(Entry x) 
     {
-        int hash1 = myhash1( key );
-        int hash2 = myhash2( key );
+        int hash1 = myhash1( x.key );
+        int hash2 = myhash2( x.key );
  
-        while (array[hash1] != null && !array[hash1].key.equals(key))
+        while (array[hash1] != null && !array[hash1].key.equals(x.key))
         {
             hash1 += hash2;
-            hash1 %= currentSize;
+            hash1 %= array.length;
         }
         return array[hash1];
     }
@@ -115,5 +115,10 @@ public class DoubleHashingTable<AnyType> {
         for( int i = 0; i < oldArray.length; i++ )
             if( oldArray[ i ] != null)
                 insert( oldArray[ i ]);
+    }
+    
+    public int nbElement()
+    {
+    	return currentSize;
     }
 }
