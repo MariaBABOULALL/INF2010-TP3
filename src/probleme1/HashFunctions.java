@@ -118,10 +118,13 @@ public class HashFunctions
     */
    public static ArrayList<Integer> randomIntegers(int length)
    {
+	  // On utilise un set pour ne pas avoir de doublons
 	  Set<Integer> nums = new HashSet<Integer>();
 	  Random generator = new Random( System.nanoTime() );
+	  // Tant que la taille du set est différente de la taille demandée
 	  while(nums.size() != length)
 	  {
+		  // On calcule un nouveau nombre aléatoire
 		  int num = generator.nextInt(p);
 		  nums.add(num);
 	  }

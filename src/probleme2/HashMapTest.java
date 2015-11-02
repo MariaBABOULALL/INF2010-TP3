@@ -12,11 +12,7 @@ public class HashMapTest
       mhmap.put(10, "patate");
       mhmap.put(25, "chou-rave");
       
-      
       System.out.println( mhmap.get(25) );
       System.out.println( mhmap.get(10) );
-      
-      
    }
-
 }
